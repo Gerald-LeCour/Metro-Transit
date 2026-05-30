@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>City Transit Pass</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="ticket">
+    <h1>City Transit</h1>
+    <p class="subtitle">Show operator your ticket</p>
+
+    <div class="logo-wrap">
+      <div class="pulse pulse-gray"></div>
+      <div class="pulse pulse-orange"></div>
+      <div class="logo">go<br><span>to</span></div>
+    </div>
+
+    <div id="time" class="time">--:--:-- --</div>
+
+    <section class="card">
+      <h2>Adult All-Day</h2>
+      <p>Minneapolis / St. Paul Metro Area</p>
+      <strong id="expires">Expires --</strong>
+    </section>
+  </main>
+
+  <script>
+    function updateTicket() {
+      const now = new Date();
+
+      document.getElementById("time").textContent =
+        now.toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true
+        });
+
+      const expire = new Date(now);
+      expire.setDate(expire.getDate() + 1);
+      expire.setHours(2, 0, 0, 0);
+
+      document.getElementById("expires").textContent =
+        "Expires " +
+        expire.toLocaleDateString([], {
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        }) +
+        " at 2:00 AM";
+    }
+
+    updateTicket();
+    setInterval(updateTicket, 1000);
+  </script>
+</body>
+</html>
