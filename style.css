@@ -28,9 +28,9 @@ h1 {
 }
 
 .logo-wrap {
-  width: 170px;
-  height: 170px;
-  margin: 0 auto 120px;
+  width: 135px;
+  height: 135px;
+  margin: 0 auto 35px;
   position: relative;
   display: grid;
   place-items: center;
@@ -39,42 +39,40 @@ h1 {
 .pulse {
   position: absolute;
   border-radius: 50%;
-  animation: breathe 2.4s infinite ease-in-out;
+  transition: transform 0.9s ease-in-out;
 }
 
 .pulse-orange {
-  width: 155px;
-  height: 155px;
-  background: #ff681f;
-  box-shadow: inset 0 0 0 14px #bf551e;
+  width: 130px;
+  height: 130px;
+  background: #ff4d00;
+  z-index: 1;
 }
 
 .pulse-gray {
-  width: 165px;
-  height: 165px;
-  background: rgba(0, 0, 0, 0.16);
-  animation-delay: 0.3s;
+  width: 128px;
+  height: 128px;
+  background: rgba(0, 0, 0, 0.283);
+  z-index: 2;
 }
 
 .logo {
   position: relative;
   z-index: 2;
-  width: 118px;
-  height: 118px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
   background: white;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  color: #0e5aa7;
-  font-size: 38px;
-  font-weight: 800;
-  line-height: 0.65;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 8px 18px rgba(0,0,0,.25);
 }
 
-.logo span {
-  font-size: 22px;
+.logo img {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
 }
 
 .time {
@@ -117,11 +115,9 @@ h1 {
 }
 
 .ticket {
-  width: 100%;
-  max-width: 430px;
-  min-height: 100dvh;
-  margin: 0 auto;
-  padding: 160px 26px 40px;
+    padding: 40px 20px 20px;
+    height: 100dvh;
+    overflow: hidden;
 }
 
 .time {
@@ -150,4 +146,23 @@ h1 {
   .card h2 {
     font-size: 28px;
   }
+}
+
+.logo {
+    position: relative;
+    z-index: 2;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+
+.logo img {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
 }
