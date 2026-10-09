@@ -1,92 +1,240 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>City Transit Pass</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="top-bar">
-    <div class="close-btn">✕</div>
-</div>
-  <main class="ticket">
-    <h1>Metro Transit</h1>
-    <p class="subtitle">Show operator your ticket</p>
+* {
+  box-sizing: border-box;
+}
 
-    <div class="logo-wrap">
-  <div class="pulse pulse-gray"></div>
-  <div class="pulse pulse-orange"></div>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  color: #33383d;
+}
 
-  <div class="logo">
-    <img src="logo.png" alt="Go To Logo">
-  </div>
-</div>
-</div>
-    </div>
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 32px;
+    background: #191919;
+    z-index: 9999;
 
-    <div id="time" class="time">--:--:-- --</div>
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
 
-    <section class="card">
-      <h2>Adult All-Day</h2>
-      <p>Minneapolis/ St. Paul Metro Area</p>
-      <strong id="expires">Expires --</strong>
-    </section>
-  </main>
+.close-btn {
+    margin-left: 14px;
+    MARGIN-RIGHT: 10px;
+    color: #5cb7d6;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+}
 
-  <script>
-    function updateTicket() {
-      const now = new Date();
+.ticket {
+  padding: 170px 30px 40px;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
 
-      document.getElementById("time").textContent =
-        now.toLocaleTimeString([], {
-          hour: "numeric",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true
-        });
+h1 {
+  font-size: 29px;
+  margin: 0;
+  font-weight: 750;
+  margin-top: 65px
+}
 
-      const expire = new Date(now);
-      expire.setDate(expire.getDate() + 1);
-      expire.setHours(2, 0, 0, 0);
+.subtitle {
+  margin: 4px 0 100px;
+  font-size: 19px;
+}
 
-      document.getElementById("expires").textContent =
-        "Expires " +
-        expire.toLocaleDateString([], {
-          month: "short",
-          day: "numeric",
-          year: "numeric"
-        }) +
-        " at 2:00 AM";
-    }
+.logo-wrap {
+  width: 135px;
+  height: 135px;
+  margin: 0 auto 35px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
 
-    updateTicket();
-    setInterval(updateTicket, 1000);
-  </script>
-  
-  <script>
-  const orangeCircle = document.querySelector(".pulse-orange");
-  const grayCircle = document.querySelector(".pulse-gray");
+.pulse {
+  position: absolute;
+  border-radius: 50%;
+  transition: transform 0.9s ease-in-out;
+}
 
-  function randomPulse() {
-    const orangeScale = 1.0 + Math.random() * 0.85;
-    const grayScale = 0.9 + Math.random() * 0.35;
+.pulse-orange {
+  width: 130px;
+  height: 130px;
+  background: rgb(122, 197, 0);
+  z-index: 1;
+}
 
-    const orangeSpeed = 500 + Math.random() * 900;
-    const graySpeed = 500 + Math.random() * 1000;
+.pulse-gray {
+  width: 128px;
+  height: 128px;
+  background: rgba(0, 0, 0, 0.283);
+  z-index: 2;
+}
 
-    orangeCircle.style.transition = `transform ${orangeSpeed}ms ease-in-out`;
-    grayCircle.style.transition = `transform ${graySpeed}ms ease-in-out`;
+.logo {
+  position: relative;
+  z-index: 2;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
 
-    orangeCircle.style.transform = `scale(${orangeScale})`;
-    grayCircle.style.transform = `scale(${grayScale})`;
+.logo img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
 
-    const nextPulse = 550 + Math.random() * 900;
-    setTimeout(randomPulse, nextPulse);
+.time {
+  text-align: center;
+  font-size: 50px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.card {
+    background: white;
+    border-radius: 4px;
+    padding: 14px 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.22);
+}
+
+.card h2 {
+  font-size: 30px;
+  font-weight: 400;
+  margin: 0 0 16px;
+}
+
+.card p {
+  font-size: 17px;
+  margin: 0 0 42px;
+  color: #5b6065;
+}
+
+.card strong {
+  font-size: 20px;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(0.94);
+  }
+  50% {
+    transform: scale(1.16);
+  }
+}
+
+.ticket {
+    padding: 40px 20px 20px;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+.time {
+  font-size: clamp(52px, 15vw, 68px);
+  white-space: nowrap;
+}
+
+.logo-wrap {
+  margin-bottom: 105px;
+}
+
+.card {
+  width: 100%;
+}
+
+@media (max-width: 390px) {
+  .ticket {
+    padding-left: 22px;
+    padding-right: 22px;
   }
 
-  randomPulse();
-</script>
+  .time {
+    font-size: 52px;
+  }
 
-</body>
-</html>
+  .card h2 {
+    font-size: 28px;
+  }
+}
+
+.logo {
+    position: relative;
+    z-index: 2;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+
+.logo img {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+}
+
+
+.ticket {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  min-height: 100dvh;
+  padding: 55px 22px 70px;
+  overflow: visible;
+}
+
+.ticket h1 {
+  margin-top: 24px;
+  font-size: 25px;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin-bottom: 65px;
+}
+
+.logo-wrap {
+  margin-bottom: 65px;
+}
+
+.time {
+  font-size: clamp(32px, 10vw, 44px);
+  margin-bottom: 12px;
+}
+
+.card {
+  padding: 12px 16px;
+}
+
+.card h2 {
+  font-size: 25px;
+  margin-bottom: 12px;
+}
+
+.card p {
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+
+.card strong {
+  font-size: 16px;
+}
