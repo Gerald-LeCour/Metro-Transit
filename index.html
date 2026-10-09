@@ -1,92 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>City Transit Pass</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Demo Ticket</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #fcfcfc;
+      color: #333638;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .top-bar {
+      height: 44px;
+      background: #101010;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 17px;
+    }
+
+    .close-btn {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: #0098c5;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .ticket {
+      width: 100%;
+      max-width: 512px;
+      margin: 0 auto;
+      padding: 96px 30px 105px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 29px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .ring {
+      width: 222px;
+      height: 222px;
+      margin: 80px auto 0;
+      border: 29px solid rgb(122, 197, 0);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+    }
+
+    .ring-inner {
+      width: 100%;
+      height: 100%;
+      border: 6px solid #639900;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+    }
+
+    .logo {
+      position: relative;
+      width: 95px;
+      height: 95px;
+      display: grid;
+      place-items: center;
+    }
+
+    .diamond {
+      position: absolute;
+      width: 68px;
+      height: 68px;
+      background: #99c747;
+      transform: rotate(45deg);
+      border-radius: 3px;
+    }
+
+    .logo-text {
+      position: relative;
+      width: 69px;
+      height: 69px;
+      border-radius: 50%;
+      background: #fcfcfc;
+      color: #205a91;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .go {
+      font-size: 46px;
+      font-weight: 800;
+      letter-spacing: -3px;
+      line-height: 0.8;
+    }
+
+    .to {
+      margin-left: 25px;
+      font-size: 27px;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1;
+    }
+
+    .clock {
+      margin-top: 91px;
+      text-align: center;
+      white-space: nowrap;
+      font-size: clamp(34px, 12.5vw, 68px);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .date {
+      margin: 8px 0 18px;
+      text-align: center;
+      font-size: 16px;
+      color: #555;
+    }
+
+    .ticket-card {
+      padding: 20px 23px 29px;
+      border: 1px solid #eeeeee;
+      border-radius: 4px;
+      background: #fcfcfc;
+      box-shadow: 0 2px 2px rgb(0 0 0 / 30%);
+    }
+
+    .ticket-name {
+      margin: 0;
+      font-size: 29px;
+      font-weight: 400;
+    }
+
+    .region {
+      margin: 10px 0 0;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .expiration {
+      margin: 42px 0 0;
+      color: #555;
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .demo-label {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 12px
+        calc(15px + env(safe-area-inset-bottom, 0px));
+      border-top: 2px solid #333;
+      background: #fff;
+      color: #333;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      z-index: 100;
+    }
+
+    @media (max-width: 400px) {
+      .ticket {
+        padding: 75px 24px 105px;
+      }
+
+      .ring {
+        margin-top: 65px;
+      }
+
+      .clock {
+        margin-top: 75px;
+      }
+
+      .ticket-name {
+        font-size: 26px;
+      }
+
+      .expiration {
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <div class="top-bar">
-    <div class="close-btn">✕</div>
-</div>
+    <button class="close-btn" aria-label="Close demo"
+            onclick="document.querySelector('.ticket').hidden = true">
+      ×
+    </button>
+  </div>
+
   <main class="ticket">
     <h1>Metro Transit</h1>
-    <p class="subtitle">Show operator your ticket</p>
+    <p class="subtitle">Demo ticket preview</p>
 
-    <div class="logo-wrap">
-  <div class="pulse pulse-gray"></div>
-  <div class="pulse pulse-orange"></div>
-
-  <div class="logo">
-    <img src="logo.png" alt="Go To Logo">
-  </div>
-</div>
-</div>
+    <div class="ring" aria-hidden="true">
+      <div class="ring-inner">
+        <div class="logo">
+          <div class="diamond"></div>
+          <div class="logo-text">
+            <span class="go">go</span>
+            <span class="to">to</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div id="time" class="time">--:--:-- --</div>
+    <div class="clock" id="clock"></div>
+    <div class="date" id="date"></div>
 
-    <section class="card">
-      <h2>Adult All-Day</h2>
-      <p>Minneapolis/ St. Paul Metro Area</p>
-      <strong id="expires">Expires --</strong>
+    <section class="ticket-card">
+      <h2 class="ticket-name">Adult All-Day</h2>
+      <p class="region">Minneapolis/ St. Paul Metro Area</p>
+      <p class="expiration" id="expiration"></p>
     </section>
   </main>
 
+  <footer class="demo-label">
+    DEMO TICKET — NOT VALID FOR TRAVEL
+  </footer>
+
   <script>
+    const clock = document.getElementById("clock");
+    const date = document.getElementById("date");
+    const expiration = document.getElementById("expiration");
+
     function updateTicket() {
       const now = new Date();
 
-      document.getElementById("time").textContent =
-        now.toLocaleTimeString([], {
-          hour: "numeric",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true
-        });
+      clock.textContent = now.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
+      });
 
-      const expire = new Date(now);
-      expire.setDate(expire.getDate() + 1);
-      expire.setHours(2, 0, 0, 0);
+      date.textContent = now.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+      });
 
-      document.getElementById("expires").textContent =
-        "Expires " +
-        expire.toLocaleDateString([], {
-          month: "short",
-          day: "numeric",
-          year: "numeric"
-        }) +
-        " at 2:00 AM";
+      // Next calendar day at 2:00 AM in the device's timezone.
+      const expires = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() + 1,
+        2, 0, 0, 0
+      );
+
+      const expiryDate = expires.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+      });
+
+      expiration.textContent =
+        `Expires ${expiryDate} at 2:00 AM`;
     }
 
     updateTicket();
     setInterval(updateTicket, 1000);
+
+    // Refresh immediately when returning to the page.
+    document.addEventListener("visibilitychange", updateTicket);
+    window.addEventListener("focus", updateTicket);
   </script>
-  
-  <script>
-  const orangeCircle = document.querySelector(".pulse-orange");
-  const grayCircle = document.querySelector(".pulse-gray");
-
-  function randomPulse() {
-    const orangeScale = 1.0 + Math.random() * 0.85;
-    const grayScale = 0.9 + Math.random() * 0.35;
-
-    const orangeSpeed = 500 + Math.random() * 900;
-    const graySpeed = 500 + Math.random() * 1000;
-
-    orangeCircle.style.transition = `transform ${orangeSpeed}ms ease-in-out`;
-    grayCircle.style.transition = `transform ${graySpeed}ms ease-in-out`;
-
-    orangeCircle.style.transform = `scale(${orangeScale})`;
-    grayCircle.style.transform = `scale(${grayScale})`;
-
-    const nextPulse = 550 + Math.random() * 900;
-    setTimeout(randomPulse, nextPulse);
-  }
-
-  randomPulse();
-</script>
-
 </body>
 </html>
